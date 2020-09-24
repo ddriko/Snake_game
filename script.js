@@ -7,6 +7,10 @@ snake[0] = {
     x: 8 * box
 }
 let direction = 'right'
+let apple = {
+    x: Math.floor(Math.random() * 15 + 1) * box,
+    y: Math.floor(Math.random() * 15 + 1) * box
+}
 
 // Função que cria o plano de fundo do jogo 
 function criarBG() {
@@ -22,6 +26,13 @@ function criarSnake() {
     }
 }
 
+// Função que cria a "Maçã"
+function drawapple() {
+    context.fillStyle = 'red'
+    context.fillRect(apple.x, apple.y, box, box)
+}
+
+
 document.addEventListener('keydown', update) // Adiciona evento de seleção de teclas  
 
 function update (event) {
@@ -32,6 +43,8 @@ function update (event) {
 }
 
 function iniciarJogo() {
+    // Esse trecho define a nova posição da cobinha caso chegue aos limites do retangulo
+    // evitando que a cobrinha suma 
     if(snake[0].x > 15 * box && direction == 'right') snake[0].x = 0
     if(snake[0].x < 0 && direction == 'left') snake[0].x = 16 * box
     if(snake[0].y > 15 * box && direction == 'down') snake[0].y = 0
@@ -40,6 +53,7 @@ function iniciarJogo() {
 
     criarBG()
     criarSnake()
+    drawapple()
 
     let snakeX = snake[0].x
     let snakeY = snake[0].y
