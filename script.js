@@ -63,7 +63,13 @@ function iniciarJogo() {
     if(direction =='up') snakeY -= box
     if(direction =='down') snakeY += box
 
-    snake.pop() // Elimina o ultimo elemento do array 
+    if(snakeX != apple.x || snakeY != apple.y) {
+        snake.pop() // Elimina o ultimo elemento do array 
+    } else {
+        apple.x = Math.floor(Math.random() * 15 + 1) * box,
+        apple.y = Math.floor(Math.random() * 15 + 1) * box
+    }
+
 
     let newHead = {
         x: snakeX,
